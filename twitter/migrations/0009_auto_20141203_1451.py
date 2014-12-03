@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('twitter', '0008_merge'),
+    ]
+
+    operations = [
+        migrations.RemoveField(
+            model_name='hash',
+            name='fore',
+        ),
+        migrations.DeleteModel(
+            name='Hash',
+        ),
+    ]
