@@ -25,18 +25,4 @@ def home(request, otro):
 	#auth.set_access_token(atoken, asecret)
 	#twitterStream = Stream(auth, listener())
 	#twitterStream.filter(track=["pizza"])
-	i=range(999)
-	if(otro=="lawea"):
-		return render(request, 'template.html', {'lista':i})
-	else:
-		return render(request, 'template.html', {'lista':range(9)})
-def homel(request, otro):
-	#auth = OAuthHandler(ckey, csecret)
-	#auth.set_access_token(atoken, asecret)
-	#twitterStream = Stream(auth, listener())
-	#twitterStream.filter(track=["pizza"])
-	i=range(13)
-	if(otro=="lawea"):
-		return render(request, 'template.html', {'lista':i})
-	else:
-		return render(request, 'template.html', {'lista':range(9)})
+	return HttpResponse("ksdjhfk")#aca yo deberia estar recibiendo un json con la wea y la wea
