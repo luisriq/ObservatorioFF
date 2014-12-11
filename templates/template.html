@@ -9,11 +9,13 @@
 	</head>
 	<body>
 		<h1>Observatorio de Comida Rapida</h1>
-
+		{%for tuit in lista%}
+			<ul>{{tuit.text}}</ul>  
+		{%endfor%}
 		<div></div>
 		<footer class="footer">
 			<div class="container">
-				creado por: Cristian Gomez, Nestor Mora, Luis Riquelme
+				creado por: Luis Riquelme, Cristian Gomez, Nestor Mora 
 			</div>
 		</footer>
 	</body>
