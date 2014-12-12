@@ -6,7 +6,7 @@ from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 
-from .models import Tweet
+from .models import Tweet, Usuario, Ciudad
 ckey = 'wcBPjzyOQhZm7RhTcOqrChbWI'
 csecret = 'zGTsXDVEED59MB0wpvGMD6spGYr1HYrKRG9c4CVYy9G9N3Djbl'
 atoken = '228562756-PW0YtSmyS32fEwPFucXaGlkdPRP53hisP1NYoCr4'
@@ -29,7 +29,23 @@ def home(request, otro):
 	auth = OAuthHandler(ckey, csecret)
 	auth.set_access_token(atoken, asecret)
 	api = tweepy.API(auth)
-	lista = api.search(q="kfc", count=100000)
+	lista = api.search(q="kfc", count=231)
+	for tweet in lista:
+		c = Ciudad.objects.get(nombre="Santiago")
+		try:
+			uz = Usuario.objects.get(cuenta=tweet.user.screen_name)
+		except:
+			uz = Usuario()
+			uz.cuenta = tweet.user.screen_name
+			uz.seguidores = 2
+			uz.id_ciudad = c
+			uz.save()
+		t = Tweet()
+		t.msg =tweet.text
+		t.favs = 1
+		t.id_usuario = uz
+		t.retweets = tweet.retweet_count 
+		t.save()
 
 	i=range(999)
 	if(otro=="lawea"):
