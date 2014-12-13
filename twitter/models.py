@@ -8,9 +8,10 @@ class Pais(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+	@staticmethod
 	def crearPais(nombre):
 		try:
-			pais = pais.objects.get(nombre)
+			pais = Pais.objects.get(nombre)
 		except:
 			pais = pais()
 			pais.nombre = nombre
@@ -23,7 +24,7 @@ class Ciudad(models.Model):
 		verbose_name_plural = "Ciudad"
 	def __unicode__(self):
 		return self.nombre
-	
+	@staticmethod
 	def crearCiudad(nombre, pais):
 		try:
 			ciudad = Ciudad.objects.get(nombre)
@@ -38,18 +39,19 @@ class Ciudad(models.Model):
 class Usuario(models.Model):
 	seguidores = models.PositiveIntegerField()
 	cuenta = models.CharField(max_length = 255, default = '')
-	id_ciudad = models.ForeignKey(Ciudad)
+	id_ciudad = models.ForeignKey(Ciudad)	
 	class Meta:
 		verbose_name_plural = "Usuario"
 	def __unicode__(self):
 		return self.cuenta
-
-	def crearUsuario(nombre, ciudad, pais):
+	@staticmethod
+	def crearUsuario(nombre, seguidores, ciudad, pais):
 		try:
 			usuario = Usuario.objects.get(nombre)
 		except:
 			usuario = Usuario()
 			usuario.nombre = nombre
+			usuario.seguidores = seguidores
 			usuario.id_ciudad = Ciudad.crearCiudad(ciudad, pais)
 		return usuario
 
@@ -63,8 +65,8 @@ class Tweet(models.Model):
 		verbose_name_plural = "Tweet"
 	def __unicode__(self):
 		return self.msg
-
-	def crearTweet(retweets, favs, msg, usuario, pais, ciudad):
+	@staticmethod
+	def crearTweet(retweets, favs, msg, usuario, seguidores, ciudad, pais):
 		try:
 			tweet = Tweet.objects.get(msg)
 		except:
@@ -72,23 +74,24 @@ class Tweet(models.Model):
 			tweet.msg = msg
 			tweet.retweets = retweets
 			tweet.favs = favs
-			tweet.id_usuario = Usuario.crearUsuario(usuario, ciudad, pais)
+			tweet.id_usuario = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
 		return tweet
 
 class Cadena(models.Model):
 	nombre = models.CharField(max_length = 255, default = '')
+	id_usuario = models.ForeignKey(Usuario)
 	class Meta:
 		verbose_name_plural = "Cadena"
 	def __unicode__(self):
 		return self.nombre
-
+	@staticmethod
 	def crearCadena(nombre):
 		try:
-			cadena = Cadena.objects.get(msg)
+			cadena = Cadena.objects.get(nombre)
 		except:
 			cadena = Cadena()
 			cadena.nombre = nombre
-		return tweet
+		return cadena
 
 class Hashtag(models.Model):
 	nombre = models.CharField(max_length = 255, default = '')
@@ -97,7 +100,7 @@ class Hashtag(models.Model):
 		verbose_name_plural = "Hashtag"
 	def __unicode__(self):
 		return self.nombre
-
+	@staticmethod
 	def crearHashtag(nombre, cadena):
 		try:
 			hastag = Hashtag.objects.get(nombre)
@@ -115,7 +118,7 @@ class Comida(models.Model):
 		verbose_name_plural = "Comida"
 	def __unicode__(self):
 		return self.nombre
-
+	@staticmethod
 	def crearComida(nombre):
 		try:
 			comida = Comida.objects.get(nombre)
@@ -135,21 +138,22 @@ class Evento(models.Model):
 		return self.nombre
 
 
+
 class Contiene(models.Model):
 	id_hashtag = models.ForeignKey(Hashtag)
 	id_tweet = models.ForeignKey(Tweet)
 	class Meta:
 		verbose_name_plural = "Contiene"
 	def __unicode__(self):
-		return self.nombre
-
-	def crearContiene(hashtag, tweet, cadena, retweets, favs, msg, usuario, pais, ciudad):
+		return str(self.id_hashtag.nombre) + "," + str(self.id_tweet.msg)
+	@staticmethod
+	def crearContiene(hashtag, cadena, retweets, favs, msg, usuario, seguidores, ciudad, pais):
 		try:
-			contiene = Contiene.objects.get(nombre)
+			contiene = Contiene.objects.get(str(hashtag)+","+str(msg))
 		except:
 			contiene = Contiene()
 			contiene.id_hashtag = Hashtag.crearHashtag(hastag, cadena)
-			contiene.id_tweet = Tweet.crearTweet(retweets, favs, msg, usuario, pais, ciudad)
+			contiene.id_tweet = Tweet.crearTweet(retweets, favs, msg, usuario, seguidores, ciudad, pais)
 		return contiene
 
 class Menciona(models.Model):
@@ -158,15 +162,15 @@ class Menciona(models.Model):
 	class Meta:
 		verbose_name_plural = "Menciona"
 	def __unicode__(self):
-		return self.nombre
-
-	def crearMenciona(usuario, pais, ciudad, retweets, favs, msg):
+		return str(self.id_usuario.cuenta)+","+str(self.id_tweet.msg)
+	@staticmethod
+	def crearMenciona(retweets, favs, msg, usuario, seguidores, ciudad, pais):
 		try:
-			menciona = Menciona.objects.get(nombre)
+			menciona = Menciona.objects.get(usuario+","+msg)
 		except:
 			menciona = Menciona()
-			menciona.id_usuario = Usuario.crearUsuario(usuario, pais, ciudad)
-			menciona.id_tweet = Tweet.crearTweet(retweets, favs, msg, usuario, pais, ciudad)
+			menciona.id_usuario = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
+			menciona.id_tweet = Tweet.crearTweet(retweets, favs, msg, usuario, seguidores, pais, ciudad)
 		return menciona
 
 class Referencia(models.Model):
@@ -185,16 +189,17 @@ class Sigue(models.Model):
 	class Meta:
 		verbose_name_plural = "Sigue"
 	def __unicode__(self):
-		return self.nombre
-
-	def crearSigue(usuario, pais, ciudad, retweets, favs, msg):
+		return str(self.id_cadena.nombre)+","+str(self.id_usuario.nombre)
+	@staticmethod
+	def crearSigue(usuario, seguidores, ciudad, pais, cadena):
 		try:
-			sigue = Sigue.objects.get(nombre)
+			sigue = Sigue.objects.get(cadena+","+usuario)
 		except:
 			sigue = Sigue()
-			sigue.id_cadena = Cadena.crearCadena(usuario, pais, ciudad)
-			sigue.id_usuario = Usuario.crearUsuario(retweets, favs, msg, usuario, pais, ciudad)
+			sigue.id_cadena = Cadena.crearCadena(cadena)
+			sigue.id_usuario = Usuario.crearUsuario(usuario, seguidres, ciudad, pais)
 		return sigue
+
 
 class Representa(models.Model):
 	id_cadena = models.ForeignKey(Cadena)
@@ -202,7 +207,18 @@ class Representa(models.Model):
 	class Meta:
 		verbose_name_plural = "Representa"
 	def __unicode__(self):
-		return self.nombre
+		return str(self.id_cadena.nombre)
+	@staticmethod
+	def crearRepresenta(usuario, seguidroes, ciudad, pais, cadena):
+		try:
+			representa = Representa.objects.get(cadena)
+		except:
+			representa = Representa()
+			representa.id_cadena = Cadena.crearCadena(cadena)
+			representa.id_usuario = Usuario.crearUsuario(usuario, seguidres, ciudad, pais)
+		return representa
+
+
 
 
 class Prepara(models.Model):
