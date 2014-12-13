@@ -103,6 +103,7 @@ class Migration(migrations.Migration):
             name='Prepara',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id_cadena', models.ForeignKey(to='twitter.Cadena')),
                 ('id_comida', models.ForeignKey(to='twitter.Comida')),
             ],
             options={
@@ -115,6 +116,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('id_comida', models.ForeignKey(to='twitter.Comida')),
+                ('id_hashtag', models.ForeignKey(to='twitter.Hashtag')),
             ],
             options={
                 'verbose_name_plural': 'Referencia',
@@ -176,6 +178,24 @@ class Migration(migrations.Migration):
             preserve_default=True,
         ),
         migrations.AddField(
+            model_name='sigue',
+            name='id_usuario',
+            field=models.ForeignKey(to='twitter.Usuario'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='representa',
+            name='id_usuario',
+            field=models.ForeignKey(to='twitter.Usuario'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='menciona',
+            name='id_tweet',
+            field=models.ForeignKey(to='twitter.Tweet'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
             model_name='menciona',
             name='id_usuario',
             field=models.ForeignKey(to='twitter.Usuario'),
@@ -185,6 +205,12 @@ class Migration(migrations.Migration):
             model_name='contiene',
             name='id_hashtag',
             field=models.ForeignKey(to='twitter.Hashtag'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='contiene',
+            name='id_tweet',
+            field=models.ForeignKey(to='twitter.Tweet'),
             preserve_default=True,
         ),
         migrations.AddField(
