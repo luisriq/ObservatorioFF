@@ -1,23 +1,318 @@
-<html>
-	<head>
-		<title>titulo y la wea</title>
-		{% load staticfiles %}
-		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sticky-footer.css">
-		
-	</head>
-	<body>
-		<h1>Observatorio de Comida Rapida</h1>
-		{%for tuit in lista%}
-			<ul>{{tuit.text}}</ul>  
-		{%endfor%}
-		<div></div>
-		<footer class="footer">
-			<div class="container">
-				creado por: Luis Riquelme, Cristian Gomez, Nestor Mora 
-			</div>
-		</footer>
-	</body>
-	
-</html>
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Observario the Comida Rapida</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/estilo.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<!--main-->
+
+<section class="main">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"> 
+        
+        <!--logo-->
+        <div class="logo"><img src="img/logo.png" alt="logo"></div>
+        <!--logo end--> 
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1"> 
+        
+        <!--welcome-message-->
+        <header class="welcome-message">
+          <h1><span class="glyphicon glyphicon-eye-open"></span> <span>Observatorio</span> The Comida Rapida</h1>
+          <h3>Se desea construir un Observatorio para la red social <strong>Twitter</strong>, analizando las cadenas de comida más populares, para así poder evaluar la aceptación de cada una de ellas por la gente que manifiesta sus opiniones mediante Twitter.</h3>
+          <hr>     
+          <h4>¿Por qué las personas prefieren un establecimiento a otro?, ¿Cuán mencionada es una cadena rápida en Twitter?, ¿Qué tanto se habla de los eventos que promocionan las cadenas de comida rápida?, ¿Cuál es la cadena de comida rápida más popular en Chile?.   Existen muchas preguntas como ésta, es por eso que se plantéa la elaboración de un observatorio que permita el rápido acceso a toda la información que pueda estar relacionada con las cadenas de comida rápida. Ésta información, pretende ser obtenida de todos los Tweets que hagan referencia a una cadena de comida rápida mediante el uso de Hashtags o palabras claves que se escogerán para describir tanto cadenas de comida rápida, como para describir tipos de comidas.</h4>
+        </header> 
+      </div>
+      <div class="col-md-5"> <img src="img/hero.png" alt=""    > </div>
+    </div>
+  </div>
+</section>
+
+<!--main end--> 
+
+<!--app screenshot -->
+
+<section class=" section-spacing text-center" id="screens">
+  <div class="container">
+    <header class="text-center">
+      <h2>Objetivos</h2>
+      <h3>¿Qué se pretende mostrar con la aplicación Web?</h3>
+      <h3>¿Cuál es su uso como herramienta para tomar desiciones?</h3>
+    </header>
+    <br/>
+    <hr/>
+    <div class="row">
+      <div class="col-md-12">
+       La aplicación Web pretende mostrar, la cantidad de menciones en Twitter para cada una de las cadenas de comida rápida, también la cantidad de seguidores que posee cada una, los eventos que se realicen y la comida que venden, todo esto, permitiendo al usuario escoger un período, y lo que desee saber sobre las cadenas, para listar las mejores opciones a modo de "filtro", dejando al usuario la posibilidad de tomar sus desiciones a la hora de escoger el mejor restaurante de comida rápida según el resto de los "Twitteros".
+      </div>
+    </div>
+    <hr/>
+  </div>
+</section>
+
+<!--app screenshot end --> 
+
+
+
+<!--Features-->
+
+<section class="features section-spacing">
+  <div class="container">
+    <header class="text-center">
+      <h2>Locales a Analizar</h2>
+      <h3>Estos son algunos de los locales a analizar.</h3>
+    </header>
+    
+    <!--feature 1-->
+    <div class="row">
+      <div class="col-md-6 text-center"> 
+        <img src="img/Mcdonalds.png"   data-no-retina="" data-wow-offset="250" > 
+      </div>
+      <div class="col-md-6" >
+        <article>
+          <h4>McDonald's</h4>
+          <p><strong>McDonald's</strong> es una cadena de restaurantes de comida rápida. Sus principales productos son las hamburguesas, sándwiches, patatas fritas, menús para el desayuno, refrescos, batidos, helados, postres y, recientemente, ensaladas y fruta. En 2014 atiende aproximadamente a 58 millones de clientes al día en 33 000 establecimientos en 119 territorios y países alrededor del mundo. La cadena emplea a 1,7 millones de personas.3 En la mayoría de los restaurantes se han incluido distintas áreas con juegos para niños. <small><a href="http://es.wikipedia.org/wiki/McDonald%27s" target="_blank">Wikipedia.org</a></small> </p>
+        </article>
+      </div>
+    </div>
+    <!--feature 1 end--> 
+    
+    <!--feature 2-->
+    <div class="row">
+      <div class="col-md-6 col-md-push-6 text-center"> 
+        <img src="img/BurgerKing.png"   data-no-retina="" data-wow-offset="250" > 
+      </div>
+      <div class="col-md-6 col-md-pull-6">
+        <article>
+          <h4>Burger King</h4>
+          <p><strong>BURGER KING®</strong> tiene una larga trayectoria como compañía dedicada a la restauración de comida rápida de hamburguesas. De hecho, el primero de suss restaurantes se fundó en 1954, en Miami, por James McLamore y David Edgerton. En tan sólo tres años se estaba comercializando la WHOPPER®, la hamburguesa más famosa de la cadena. Esto fue tan sólo el inicio de una larga carrera de éxitos. <small><a href="http://www.burgerking.es/empresa/sobre-nosotros" target="_blank">BurgerKing.es</a></small></p>
+        </article>
+      </div>
+    </div>
+    <!--feature 2 end--> 
+    
+    <!--feature 3-->
+    <div class="row">
+      <div class="col-md-6 text-center"> <img src="img/Kfc.png"   data-no-retina="" data-wow-offset="250" > </div>
+      <div class="col-md-6">
+        <article>
+          <h4>Kentucky Fried Chicken</h4>
+          <p><strong>Kentucky Fried Chicken</strong> (traducible al español como Pollo frito de Kentucky), más conocido por sus siglas KFC, es una franquicia de restaurantes de comida rápida especializada en pollo frito, que pertenece al grupo Yum! Brands. Cuenta con más de 18.000 restaurantes en 120 países. <small><a href="http://es.wikipedia.org/wiki/Kentucky_Fried_Chicken" target="_blank">Wikipedia.org</a></small></p>
+        </article>
+      </div>
+    </div>
+    <!--feature 3 end--> 
+    
+    <!--feature 2-->
+    <div class="row">
+      <div class="col-md-6 col-md-push-6 text-center"> 
+        <img src="img/Telepizza.png"   data-no-retina="" > 
+      </div>
+      <div class="col-md-6 col-md-pull-6" >
+        <article>
+          <h4>Telepizza</h4>
+          <p>
+            <strong>Telepizza®</strong> es una cadena multinacional de origen español de pizzerías con presencia en varios países.
+          </p>
+          <p>Fue fundada por el inmigrante cubano Leopoldo Fernández Pujals y un grupo de hosteleros madrileños y vigueses, quienes en 1985 inauguraron su primera tienda Telepizza en el madrileño barrio del Pilar(C/ Fermín Caballero nº 94)]. La cadena se extendió por la ciudad primero y creció en pocos años hasta convertirse en líder del mercado español de pizzas. <small>
+            <a href="http://es.wikipedia.org/wiki/Telepizza" target="_blank">Wikipedia.org</a></small>
+          </p>
+        </article>
+      </div>
+    </div>
+    <!--feature 2 end--> 
+    
+    <!--feature 3-->
+    <div class="row">
+      <div class="col-md-6 text-center"> <img src="img/Tacobell.png"    data-no-retina="" data-wow-offset="250" > </div>
+      <div class="col-md-5">
+        
+        <article>
+          <h4>TacoBell</h4>
+          <p><strong>Taco Bell</strong> es una franquicia de restaurantes de comida rápida, especializada en cocina Tex-Mex. La cadena fue fundada en 1962 por Glen Bell y actualmente pertenece a la multinacional Yum! Brands.
+          <small><a href="http://es.wikipedia.org/wiki/Taco_Bell" target="_blank">Wikipedia.org</a></small></p>
+        </article>
+      </div>
+    </div>
+    <!--feature 3 end-->  
+    <!--feature 2-->
+    <div class="row">
+      <div class="col-md-4 col-md-push-7 text-center"> 
+        <img src="img/pizzahut.png"   data-no-retina="" > 
+      </div>
+      <div class="col-md-5 col-md-pull-3" style="margin-left:50px;">
+        <article>
+          <h4>Pizza Hut</h4>
+          <p>
+            <strong>Pedro Juan y Diego®</strong> Pizza Hut es una franquicia estadounidense de restaurantes de comida rápida, especializada en la elaboración de pizzas. Pertenece al grupo Yum! Brands.
+          
+          <small><a href="http://es.wikipedia.org/wiki/Pizza_Hut" target="_blank">Wikipedia.org</a></small>
+          </p>
+        </article>
+      </div>
+    </div>
+    <!--feature 2 end-->
+</section>
+
+
+<!--Features end--> 
+
+
+<!--video-->
+
+<section class="section-spacing text-center" style="border: solid 1px #EEE">
+  <div class="container">
+    <header class="text-center">
+      <h2>Menciones</h2>
+      <h3>Menciones por Cadena</h3>
+    </header>
+    <div class="row">
+      <div class="col-md-10 col-sm-11 col-xs-11 center-block " >
+        <!-- otro grafico -->
+        <div class="container">
+        <div class="row ">
+          <div class="col-md-4 col-sm-4 col-xs-11 vcenter" >
+            <canvas id="menciones" height="450" width="450"></canvas>
+          </div>
+          <div class="col-md-6 col-sm-7 col-xs-11 col-md-push-1 col-sm-push-1   vcenter">
+          <div class="md p-3"></div>
+
+          Nullam sagittis fermentum ex et vestibulum. Donec rutrum, felis vitae vehicula efficitur, sem erat ultricies felis, at maximus ligula tellus a orci. Nam dictum risus diam, interdum iaculis sapien consequat non. Nunc faucibus bibendum lorem sed aliquet. Nulla facilisis sodales viverra. Quisque non ex facilisis, pretium mi et, porttitor ex. Aliquam at lectus sagittis, rutrum magna vitae, cursus arcu. Fusce fermentum nec metus vitae faucibus. Sed placerat mi lobortis, vestibulum metus at, sollicitudin enim. Aenean sagittis mi ut metus consectetur, vel feugiat elit pretium. Phasellus vulputate mi laoreet est dignissim, ac scelerisque ex sodales. Suspendisse dictum dictum enim, sed faucibus dolor.
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--video end--> 
+
+<!--sub form-->
+
+<section class="sub-form section-spacing text-center" id="sub">
+  <div class="container">
+    <header class="text-center">
+      <h2>Favoritos</h2>
+      <h3>Subtitulo</h3>
+    </header>
+
+    <div class="row">
+      <div class="col-md-10 col-sm-11 col-xs-11 center-block " >
+        <!-- otro grafico -->
+
+        <div class="container">
+        
+          <div class="col-md-4 col-sm-4 col-xs-11 vcenter" >
+            <canvas id="favoritos" height="450" width="450"></canvas>
+          </div>
+          <div class="col-md-6 col-sm-7 col-xs-11 col-md-push-1 col-sm-push-1  col-xs-push-1 vcenter">
+          <div class="md p-3"></div>
+          Nullam sagittis fermentum ex et vestibulum. Donec rutrum, felis vitae vehicula efficitur, sem erat ultricies felis, at maximus ligula tellus a orci. Nam dictum risus diam, interdum iaculis sapien consequat non. Nunc faucibus bibendum lorem sed aliquet. Nulla facilisis sodales viverra. Quisque non ex facilisis, pretium mi et, porttitor ex. Aliquam at lectus sagittis, rutrum magna vitae, cursus arcu. Fusce fermentum nec metus vitae faucibus. Sed placerat mi lobortis, vestibulum metus at, sollicitudin enim. Aenean sagittis mi ut metus consectetur, vel feugiat elit pretium. Phasellus vulputate mi laoreet est dignissim, ac scelerisque ex sodales. Suspendisse dictum dictum enim, sed faucibus dolor.
+          </div>
+        
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--sub form end--> 
+<!--video-->
+
+<section class="section-spacing text-center" style="border: solid 1px #EEE">
+  <div class="container">
+    <header class="text-center">
+      <h2>Otros</h2>
+      <h3>Subtitulo</h3>
+    </header>
+    <div class="row">
+      <div class="col-md-10 col-sm-11 col-xs-11 center-block " >
+        <!-- otro grafico -->
+        <div class="container">
+        <div class="row ">
+          <div class="col-md-4 col-sm-4 col-xs-11 vcenter" >
+            <canvas id="otros" height="450" width="450"></canvas>
+          </div>
+          <div class="col-md-6 col-sm-7 col-xs-11 col-md-push-1 col-sm-push-1   vcenter">
+          <div class="md p-3"></div>
+
+          Nullam sagittis fermentum ex et vestibulum. Donec rutrum, felis vitae vehicula efficitur, sem erat ultricies felis, at maximus ligula tellus a orci. Nam dictum risus diam, interdum iaculis sapien consequat non. Nunc faucibus bibendum lorem sed aliquet. Nulla facilisis sodales viverra. Quisque non ex facilisis, pretium mi et, porttitor ex. Aliquam at lectus sagittis, rutrum magna vitae, cursus arcu. Fusce fermentum nec metus vitae faucibus. Sed placerat mi lobortis, vestibulum metus at, sollicitudin enim. Aenean sagittis mi ut metus consectetur, vel feugiat elit pretium. Phasellus vulputate mi laoreet est dignissim, ac scelerisque ex sodales. Suspendisse dictum dictum enim, sed faucibus dolor.
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--video end--> 
+
+<script src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/graficos.js"></script>
+
+<!--Twitter feed -->
+
+<section class="twitter-feed section-spacing text-center">
+  <div class="overlay-t"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-13 center-block col-sm-11 col-xs-11"> <img class="twit-icon" src="img/twitter-icon.png"> </div></div>
+      <div class="col-md-13 center-block col-sm-11 col-xs-11">
+        <h2>Algunos Tweets</h2>
+        
+    </div>
+  </div>
+  <div class="container">
+    <div class="p-1"></div>
+    <div class="row">
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+    </div>
+  </div>
+</section>
+
+<!--Twitter feed end --> 
+
+<!--site-footer-->
+<footer class="site-footer section-spacing">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <small>© Fireness. Creado por Cristian Lucho y Nestor.</small>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--site-footer end--> 
+
+<!--PRELOAD-->
+<div id="preloader" style="display: none;">
+  <div id="status" style="display: none;"></div>
+</div>
+<!--end PRELOAD--> 
+
+</body></html>
+<!--
+{% load staticfiles %}
+{%for tuit in lista%}
+{{tuit.text}}
+{%endfor%}
+-->

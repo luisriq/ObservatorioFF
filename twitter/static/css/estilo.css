@@ -1,0 +1,674 @@
+/*complicado*/
+
+/* ==========================================================================
+   Tabel Of Contents
+   ========================================================================== 
+   1.General
+   2.main
+   3.video
+   4.Features
+   5.Subscription form
+   6.Countdown styles
+   7.Twitter feed 
+   8.Contact 
+   9.contact Form Validation
+   10.footer
+   11.Social
+   12.scroll top
+   13.Small devices (tablets, 768px and up)
+   14.Medium devices (desktops, 992px and up)
+   15.small devices
+*/
+   
+   
+/* ==========================================================================
+   1.General
+   ========================================================================== */
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+p { color: #888; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+a { color: #00bc95; }
+
+a:hover,
+a:focus {
+  color: #00B28D;
+  text-decoration: none;
+}
+
+a:focus { outline: none; }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.md{
+	display: none;
+}
+.sm{
+	display: none;
+}
+.xs{
+	display: none;
+}
+.p-1{padding: 1em}
+.p-2{padding: 2em}
+.p-3{padding: 3em}
+.p-4{padding: 4em}
+.p-5{padding: 5em}
+.p-6{padding: 6em}
+.p-7{padding: 7em}
+.p-8{padding: 8em}
+.p-9{padding: 9em}
+.p-10{padding: 10em}
+.p-11{padding: 11em}
+.p-12{padding: 12em}
+.twitUser{
+	color: #28F;
+}
+.twit{
+	background-color: #FFF !important;
+	border: solid 1px #EEE;
+	color: #555;
+	padding: .5em 2.5em;
+	border-radius: .3em;
+	margin-top: .3em;
+}
+.twit span{
+	margin-right: 1em;
+}
+
+
+/* ==========================================================================
+   2.main
+   ========================================================================== */
+   
+.main {
+  background: url(../img/bg.jpg) center center no-repeat scroll;
+  background-size: cover;
+  padding: 3em 0 4.5em;
+  position: relative;
+  color: #fff;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #00a5d5;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwYTVkNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGJjOTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F0BF2E), color-stop(100%, #E61F00));
+  background: -webkit-linear-gradient(top, #F0BF2E 0%, #E61F00 100%);
+  background: linear-gradient(to bottom, #F0BF2E 0%, #E61F00 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F0BF2E', endColorstr='#E61F00', GradientType=0 );
+  opacity: .85;
+  top: 0;
+}
+
+.main h1 {
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+.main h1,
+.main h2 { font-weight: 300; }
+
+.main h1 span { font-weight: 400; }
+
+.welcome-message { padding-top: 1.5em; }
+
+.action-btn { margin: 1.5em 0 3em; }
+
+.action-btn .btn-default {
+  border-radius: 7px;
+  padding: 1em 3em;
+  color: #2b4349;
+  background-color: rgba(235,245,249,.7);
+  border-color: rgba(235,245,249,.7);
+  display: block;
+}
+
+.action-btn .btn-default:hover,
+.action-btn .btn-default:focus,
+.action-btn .btn-default:active {
+  color: #0b2227;
+  background-color: rgba(245,245,249,.9);
+  border-color: rgba(245,245,249,.9);
+}
+
+.action-btn a:first-child { margin: 0 0 0.75em 0; }
+
+/* ==========================================================================
+   3.video
+   ========================================================================== */
+   
+.video { border-top: 1px solid #F0F0F0; }
+
+.embed-responsive {
+  box-shadow: 0 0 0 15px #fff, 0 0 3px 15px #D3D3D3;
+  border-radius: 1px;
+  margin: 2.25em 0 1.5em;
+}
+
+/* ==========================================================================
+   4.Features
+   ========================================================================== */
+   
+.section-spacing { padding: 4.5em 0; }
+
+.section-spacing header h2,
+.section-spacing header h3,
+.features h4 { margin-top: 0; }
+
+.section-spacing h2 {
+  color: #333;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.section-spacing header h3 {
+  color: #999;
+  font-size: 20px;
+}
+
+.features { background: #384255 url(../img/noise.png) 0 0 repeat fixed; }
+
+.section-spacing.features header h2 { color: #fff; }
+
+.section-spacing.features header h3 { color: #D3D3D3; }
+
+.features .row { margin: 4.5em 0; }
+
+.features .row:last-child { margin-bottom: 0; }
+
+.features article {
+  margin-top: 3em;
+  text-align: center;
+}
+
+.features h4 {
+  font-size: 20px;
+  color: #D7D7D7;
+  text-transform: uppercase;
+}
+
+.features p {
+  font-size: 18px;
+  color: #768197;
+}
+
+.features header h2,
+.features header h3,
+.features h4,
+.features p { text-shadow: 0 1px 2px #333; }
+
+/* ==========================================================================
+   5.Subscription form 
+   ========================================================================== */
+
+   
+ .form-control::-webkit-input-placeholder {
+ color: #C1C1C1;
+}
+ .form-control:-moz-placeholder {
+ color: #C1C1C1;
+}
+ .form-control::-moz-placeholder {
+ color: #C1C1C1;
+}
+ .form-control:-ms-input-placeholder {
+ color: #C1C1C1;
+}
+
+.center-block { float: none; }
+
+.sub-form header { margin-bottom: 2.625em; }
+
+.sub-form .form-control {
+  padding: 1em 2em;
+  border-radius: 30px;
+  margin-bottom: 1.5em;
+}
+
+.sub-form .btn-default { padding: 1em 5em; }
+
+.sub-form .form-control,
+.sub-form .btn-default {
+  display: block;
+  width: 100%;
+}
+
+.form-control {
+  background-color: #fff;
+  border: 1px solid #E5E5E5;
+  height: auto;
+  padding: 0.75em 2em;
+  border-radius: 7px;
+  margin-right: 1em;
+}
+
+.form-control:focus {
+  border-color: #E5E5E5;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
+.btn-default {
+  border-radius: 30px;
+  padding: 1em 3em;
+  color: #fff;
+  background-color: #00bc95;
+  border-color: #00bc95;
+  font-weight: 700;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+  text-transform: uppercase;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+  color: #fff;
+  background-color: #00B28D;
+  border-color: #00B28D;
+}
+
+.btn:active:focus,
+.btn-default:focus,
+.btn:focus,
+.btn-default:active { outline: none; }
+
+#mc-notification { margin: 1.5em 0 0; }
+
+#mc-notification .alert,
+#mc-notification .success { display: inline-block; }
+
+.success,
+.alert,
+.success-cf p,
+.error-cf p {
+  padding: 1em 2em;
+  margin-bottom: 0;
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+.success,
+.success-cf p {
+  background: #dff0d8;
+  color: #3c763d;
+  border: 1px solid rgba(60, 118, 61, 0.18);
+}
+
+.alert,
+.error-cf p {
+  background: #F1D7D7;
+  color: #A95252;
+  border: 1px solid rgba(169, 82, 82, 0.18);
+}
+
+.success i,
+.alert i,
+.success-cf i,
+.error-cf i { padding-right: .5em; }
+
+/* ==========================================================================
+   6.Countdown styles
+   ========================================================================== */
+ul.countdown {
+  list-style: none;
+  display: block;
+  margin-bottom: 0;
+  padding: 0 0 3em;
+}
+
+ul.countdown li { display: inline-block; }
+
+ul.countdown li span { font-size: 36px; }
+
+ul.countdown li.seperator {
+  font-size: 30px;
+  line-height: 50px;
+  vertical-align: top;
+  padding: 0 8px;
+}
+
+ul.countdown li p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   7.Twitter feed
+   ========================================================================== */
+
+.twitter-feed {
+  background: url(../img/bg-t.jpg) center center no-repeat scroll;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+}
+
+.overlay-t {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(51, 51, 51, 0.7);
+  top: 0;
+}
+
+.twitter-feed h2 {
+  margin: 0;
+  color: #fff;
+}
+.twit-icon{
+	height: 5em;
+	margin-bottom: .5em
+}
+
+
+.tweet { font-size: 18px; }
+
+/* ==========================================================================
+   8.Contact
+   ========================================================================== */
+ 
+.screenshot header,
+.contact header { margin-bottom: 3em; }
+
+.contact-form .form-control {
+  border-color: #ddd;
+  margin-bottom: .75em;
+  padding: 1em;
+  margin-bottom: 1.5em;
+}
+
+.contact .btn-default { width: 100%; }
+
+/* ==========================================================================
+   9.contact Form Validation
+   ========================================================================== */
+ 
+.contact-form label.error {
+  margin-bottom: 1.5em;
+  font-weight: 600;
+  color: #ea5050;
+}
+
+.contact-form label.error i { padding-right: 8px; }
+
+.success-cf,
+.error-cf { display: none; }
+
+.contact-form .success-cf p,
+.contact-form .error-cf p {
+  position: absolute;
+  display: block;
+  top: 20%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.contact-form .form-control.error {
+  border-color: #E7BEBE;
+  color: #D95C5C;
+  border-left: none;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  box-shadow: .3em 0 0 0 #D95C5C inset;
+  margin-bottom: .75em;
+}
+
+.contact-form .form-control.error:focus {
+  border-color: #ff5050;
+  color: #ff5050;
+  box-shadow: .3em 0 0 0 #FF5050 inset;
+}
+
+.contact-form .valid { border-color: #2ecc71; }
+
+/* ==========================================================================
+   10.footer
+   ========================================================================== */
+   
+.site-footer,
+ .sub-form,
+.video { background: #FAFAFA; }
+
+.site-footer.section-spacing {
+  padding: 4.5em 0;
+  border-top: 1px solid #F0F0F0;
+}
+
+.site-footer small {
+  color: #B3B3B3;
+  font-size: 1em;
+  margin: 1.5em 0 .75em;
+  display: inline-block;
+}
+
+.modal-header {
+  background: #00bc95;
+  position: relative;
+  min-height: 0;
+  padding: 1.5em 1em;
+}
+
+.modal-title {
+  color: #FFF;
+  font-weight: 700;
+}
+
+button.close {
+  color: #00bc95;
+  opacity: 1;
+  background: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  line-height: 35px;
+  position: absolute;
+  right: 16px;
+}
+
+.close:hover,
+.close:focus {
+  color: #00B28D;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  outline: none;
+}
+
+.modal-body { padding: 1.5em; }
+
+/* ==========================================================================
+   11.Social 
+   ========================================================================== */
+
+
+.social li {
+  display: inline-block;
+  padding-right: .8em;
+}
+
+.social li:last-child { padding-right: 0; }
+
+.social li a {
+  display: block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  color: #00bc95;
+  border-radius: 50%;
+  position: relative;
+  -webkit-transition: all .8s ease;
+  transition: all .8s ease;
+  border: 1px solid #00bc95;
+  font-size: 1.3em;
+}
+
+.social li a:hover {
+  color: #fff;
+  background: #00bc95;
+}
+
+/* ==========================================================================
+   12.scroll top
+   ========================================================================== */
+   
+.scroll-top { margin-bottom: 0; }
+
+.scroll-top a {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  padding: .8em 1em;
+  display: none;
+  z-index: 200;
+  border-radius: 5px;
+  -webkit-transition: background .5s ease-in;
+  transition: background .5s ease-in;
+}
+
+.scroll-top a:hover { background: #00bc95; }
+
+/* ==========================================================================
+   13.Small devices (tablets, 768px and up)
+   ========================================================================== */
+   
+@media (min-width: 768px) {
+.sm{
+	display: inline-block;
+}
+.main { padding: 3em 0 4.5em; }
+
+.welcome-message { padding-top: 2.25em; }
+
+.main h1 { font-size: 60px; }
+
+.main h2 { font-size: 48px; }
+
+.action-btn .btn-default { display: inline-block; }
+
+.action-btn a:first-child { margin: 0 1.5em 0 0; }
+
+.embed-responsive {
+  box-shadow: 0 0 0 30px #fff, 0 0 8px 30px #D3D3D3;
+  margin: 4.5em 0 3em;
+  border: 2px solid #000;
+}
+
+ul.countdown li span { font-size: 48px; }
+
+ul.countdown li.seperator {
+  font-size: 36px;
+  line-height: 68px;
+  padding: 0 20px;
+}
+
+ul.countdown li p { font-size: 20px; }
+
+}
+
+/* ==========================================================================
+   14.Medium devices (desktops, 992px and up) 
+   ========================================================================== */
+   
+@media (min-width: 992px) {
+
+.md{
+	display: inline-block;
+}
+.main {
+  padding: 4.5em 0 6em;
+  text-align: left;
+  background: url(../img/bg.jpg) center center no-repeat fixed;
+  background-size: cover;
+}
+
+.welcome-message { padding-top: 6em; }
+
+.action-btn { margin: 1.5em 0 0; }
+
+.section-spacing { padding: 6em 0; }
+
+.features article {
+  margin-top: 10.5em;
+  text-align: inherit;
+}
+
+.sub-form .form-control {
+  width: 50%;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.sub-form .btn-default {
+  width: auto;
+  display: inline-block;
+}
+
+.twitter-feed {
+  background: url(../img/bg-t.jpg) center center no-repeat fixed;
+  background-size: cover;
+}
+
+}
+
+/* ==========================================================================
+   16.small devices 
+   ========================================================================== */
+   
+
+
+@media (max-width: 320px) {
+
+ul.countdown li span { font-size: 28.833px; }
+
+ul.countdown li.seperator {
+  font-size: 25.629px;
+  line-height: 38.439px;
+  vertical-align: top;
+  padding: 0 2px;
+}
+.xs{
+	display: inline-block;
+}
+
+ul.countdown li p { font-size: 12.642px; }
+
+
+}
