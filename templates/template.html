@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Observario the Comida Rapida</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="css/estilo.css" rel="stylesheet">
+<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+<link href="{% static "css/estilo.css" %}" rel="stylesheet">
 
 
 </head>
@@ -21,7 +23,7 @@
       <div class="col-md-12"> 
         
         <!--logo-->
-        <div class="logo"><img src="img/logo.png" alt="logo"></div>
+        <div class="logo"><img src="{% static "img/logo.png" %}" alt="logo"></div>
         <!--logo end--> 
         
       </div>
@@ -37,7 +39,7 @@
           <h4>¿Por qué las personas prefieren un establecimiento a otro?, ¿Cuán mencionada es una cadena rápida en Twitter?, ¿Qué tanto se habla de los eventos que promocionan las cadenas de comida rápida?, ¿Cuál es la cadena de comida rápida más popular en Chile?.   Existen muchas preguntas como ésta, es por eso que se plantéa la elaboración de un observatorio que permita el rápido acceso a toda la información que pueda estar relacionada con las cadenas de comida rápida. Ésta información, pretende ser obtenida de todos los Tweets que hagan referencia a una cadena de comida rápida mediante el uso de Hashtags o palabras claves que se escogerán para describir tanto cadenas de comida rápida, como para describir tipos de comidas.</h4>
         </header> 
       </div>
-      <div class="col-md-5"> <img src="img/hero.png" alt=""    > </div>
+      <div class="col-md-5"> <img src="{% static "css/img/hero.png" %}" alt=""    > </div>
     </div>
   </div>
 </section>
@@ -80,7 +82,7 @@
     <!--feature 1-->
     <div class="row">
       <div class="col-md-6 text-center"> 
-        <img src="img/Mcdonalds.png"   data-no-retina="" data-wow-offset="250" > 
+        <img src="{% static "img/Mcdonalds.png" %}"   data-no-retina="" data-wow-offset="250" > 
       </div>
       <div class="col-md-6" >
         <article>
@@ -94,7 +96,7 @@
     <!--feature 2-->
     <div class="row">
       <div class="col-md-6 col-md-push-6 text-center"> 
-        <img src="img/BurgerKing.png"   data-no-retina="" data-wow-offset="250" > 
+        <img src="{% static "img/BurgerKing.png" %}"   data-no-retina="" data-wow-offset="250" > 
       </div>
       <div class="col-md-6 col-md-pull-6">
         <article>
@@ -107,7 +109,7 @@
     
     <!--feature 3-->
     <div class="row">
-      <div class="col-md-6 text-center"> <img src="img/Kfc.png"   data-no-retina="" data-wow-offset="250" > </div>
+      <div class="col-md-6 text-center"> <img src="{% static "img/Kfc.png" %}"   data-no-retina="" data-wow-offset="250" > </div>
       <div class="col-md-6">
         <article>
           <h4>Kentucky Fried Chicken</h4>
@@ -120,7 +122,7 @@
     <!--feature 2-->
     <div class="row">
       <div class="col-md-6 col-md-push-6 text-center"> 
-        <img src="img/Telepizza.png"   data-no-retina="" > 
+        <img src="{% static "img/Telepizza.png" %}"   data-no-retina="" > 
       </div>
       <div class="col-md-6 col-md-pull-6" >
         <article>
@@ -138,7 +140,7 @@
     
     <!--feature 3-->
     <div class="row">
-      <div class="col-md-6 text-center"> <img src="img/Tacobell.png"    data-no-retina="" data-wow-offset="250" > </div>
+      <div class="col-md-6 text-center"> <img src="{% static "img/Tacobell.png" %}"    data-no-retina="" data-wow-offset="250" > </div>
       <div class="col-md-5">
         
         <article>
@@ -152,7 +154,7 @@
     <!--feature 2-->
     <div class="row">
       <div class="col-md-4 col-md-push-7 text-center"> 
-        <img src="img/pizzahut.png"   data-no-retina="" > 
+        <img src="{% static "img/pizzahut.png" %}"   data-no-retina="" > 
       </div>
       <div class="col-md-5 col-md-pull-3" style="margin-left:50px;">
         <article>
@@ -262,8 +264,8 @@
 
 <!--video end--> 
 
-<script src="js/Chart.min.js"></script>
-<script type="text/javascript" src="js/graficos.js"></script>
+<script src="{% static "js/Chart.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/graficos.js" %}"></script>
 
 <!--Twitter feed -->
 
@@ -271,7 +273,7 @@
   <div class="overlay-t"></div>
   <div class="container">
     <div class="row">
-      <div class="col-md-13 center-block col-sm-11 col-xs-11"> <img class="twit-icon" src="img/twitter-icon.png"> </div></div>
+      <div class="col-md-13 center-block col-sm-11 col-xs-11"> <img class="twit-icon" src="{% static "img/twitter-icon.png" %}"> </div></div>
       <div class="col-md-13 center-block col-sm-11 col-xs-11">
         <h2>Algunos Tweets</h2>
         
@@ -280,11 +282,9 @@
   <div class="container">
     <div class="p-1"></div>
     <div class="row">
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@NombreUsuario</span> alsbdlakhsdlkaj slkdjalksd lakshd jasdkjl hñkasld jhals kdhlaksdlk jalskjals</div>
+    {%for tuit in tweets%} 
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@{{tuit.["cuenta"]]}}</span> {{tuit.["mensaje"]]}}</div>
+    {%endfor%}
     </div>
   </div>
 </section>
@@ -312,7 +312,5 @@
 </body></html>
 <!--
 {% load staticfiles %}
-{%for tuit in lista%}
-{{tuit.text}}
-{%endfor%}
+
 -->
