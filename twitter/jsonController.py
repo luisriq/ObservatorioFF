@@ -26,3 +26,9 @@ def home(request, otro):
 	#twitterStream = Stream(auth, listener())
 	#twitterStream.filter(track=["pizza"])
 	return HttpResponse("ksdjhfk")#aca yo deberia estar recibiendo un json con la wea y la wea
+def tweets(request, otro):
+	lista = []
+	for t in Tweet.objects.all():
+		lista.append({"cuenta":t.id_usuario.cuenta, "mensaje":t.msg})
+
+	return render(request, 'template.html', {'lista':lista})
