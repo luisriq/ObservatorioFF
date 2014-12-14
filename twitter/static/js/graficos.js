@@ -1,3 +1,19 @@
+xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var jsonRespuesta = JSON.parse(responseText);
+    //document.getElementById("json").innerHTML=xmlhttp.responseText;
+    console.log(jsonRespuesta);
+    /*window.myRadar = new Chart(document.getElementById("menciones").getContext("2d")).Doughnut(
+              jsonRespuesta, {
+              responsive: true
+            });
+    }*/
+  }
+
+
 var radarChartData = {
             labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
             datasets: [
@@ -15,28 +31,8 @@ var radarChartData = {
           };
 
           window.onload = function(){
-            window.myRadar = new Chart(document.getElementById("menciones").getContext("2d")).Doughnut(
-              [{
-                  value: 300,
-                  color:"#F7464A",
-                  highlight: "#FF5A5E",
-                  label: "Red"
-              },
-              {
-                  value: 50,
-                  color: "#46BFBD",
-                  highlight: "#5AD3D1",
-                  label: "Green"
-              },
-              {
-                  value: 100,
-                  color: "#FDB45C",
-                  highlight: "#FFC870",
-                  label: "Yellow"
-              }]
-              , {
-              responsive: true
-            });
+            //xmlhttp.open("GET","/json/menciones",true);
+            //xmlhttp.send();
             window.myRadar = new Chart(document.getElementById("favoritos").getContext("2d")).Bar(radarChartData, {
               responsive: true 
             });

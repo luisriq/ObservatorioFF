@@ -19,13 +19,27 @@ class listener(StreamListener):
 
     def on_error(self, status):
         print status
-
+def menciones():
+	#cargar aqui datos de menciones.
+	""" Formato
+	[{
+        value: <cantidad:int>,
+        color:"#F7464A",#color representativo
+        highlight: "#FF5A5E",#deberia ser el mismo mas clarito
+        label: "Nombre de la cadena"
+    },...]
+	"""
+	jsonMenciones='[{value: 300,color:"#F7464A",highlight: "#FF5A5E",label: "McDonals"},{value: 150,color: "#46BFBD",highlight: "#5AD3D1",label: "Burger King"},{value: 100,color: "#FDB45C",highlight: "#FFC870",label: "KFC"}]'
+	return jsonMenciones
 def home(request, otro):
+	respuesta = "Error de Soicitud"
+	if(otro=="menciones"):
+		respuesta=menciones()
 	#auth = OAuthHandler(ckey, csecret)
 	#auth.set_access_token(atoken, asecret)
 	#twitterStream = Stream(auth, listener())
 	#twitterStream.filter(track=["pizza"])
-	return HttpResponse("ksdjhfk")#aca yo deberia estar recibiendo un json con la wea y la wea
+	return HttpResponse(respuesta)#aca yo deberia estar recibiendo un json con la wea y la wea
 def tweets(request, otro):
 	lista = []
 	for t in Tweet.objects.all():
