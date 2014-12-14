@@ -29,6 +29,6 @@ def home(request, otro):
 def tweets(request, otro):
 	lista = []
 	for t in Tweet.objects.all():
-		lista.append({"cuenta":t.id_usuario.cuenta, "mensaje":t.msg})
+		lista.append([t.id_usuario.cuenta, t.msg])
 
 	return render(request, 'template.html', {'tweets':lista})

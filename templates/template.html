@@ -39,7 +39,7 @@
           <h4>¿Por qué las personas prefieren un establecimiento a otro?, ¿Cuán mencionada es una cadena rápida en Twitter?, ¿Qué tanto se habla de los eventos que promocionan las cadenas de comida rápida?, ¿Cuál es la cadena de comida rápida más popular en Chile?.   Existen muchas preguntas como ésta, es por eso que se plantéa la elaboración de un observatorio que permita el rápido acceso a toda la información que pueda estar relacionada con las cadenas de comida rápida. Ésta información, pretende ser obtenida de todos los Tweets que hagan referencia a una cadena de comida rápida mediante el uso de Hashtags o palabras claves que se escogerán para describir tanto cadenas de comida rápida, como para describir tipos de comidas.</h4>
         </header> 
       </div>
-      <div class="col-md-5"> <img src="{% static "css/img/hero.png" %}" alt=""    > </div>
+      <div class="col-md-5"> <img src="{% static "img/hero.png" %}" alt=""    > </div>
     </div>
   </div>
 </section>
@@ -283,7 +283,7 @@
     <div class="p-1"></div>
     <div class="row">
     {%for tuit in tweets%} 
-      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@{{tuit.["cuenta"]]}}</span> {{tuit.["mensaje"]]}}</div>
+      <div class="col-md-4 center-block col-sm-11 col-xs-11 text-left twit"><span class="twitUser">@{{tuit.0}}</span> {{tuit.1}}</div>
     {%endfor%}
     </div>
   </div>
