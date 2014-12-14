@@ -44,10 +44,15 @@ def menciones():
 	jsonMenciones=" ["
 	print type(jsonMenciones)
 	js = []
+
+	normal=["#F00","#F90","#FF0","#CF0","#2F2","#2F9","#0FF","#09F","#00F","#70F","#F90","#FF0","#CF0","#2F2","#2F9","#0FF","#09F","#00F","#70F"]
+	highlight=["#F33","#FA3","#FF5","#DF2","#5F5","#5FB","#5FF","#3BF","#33F","#B3F","#FA3","#FF5","#DF2","#5F5","#5FB","#5FF","#3BF","#33F","#B3F"]
+	c=0
 	for k in datos.keys():
+		c+=1
 		print k, datos[k]
 		print type(jsonMenciones)
-		js.append({"value":datos[k],"color": "#F7464A", "highlight": "#FF5A5E","label": k})
+		js.append({"value":datos[k],"color": normal[c], "highlight": highlight[c],"label": k})
 	return json.dumps(js)
 def favoritos():
 	#cargar aqui datos de menciones.
@@ -95,9 +100,8 @@ def favoritos():
 	}
 	jsonMenciones='{ \"labels\": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"], \"datasets\": [{ \"label\": \"My First dataset\",\"fillColor\": \"rgba(230,165,0,0.5)\",\"strokeColor\": \"rgba(230,165,0,.8)\",\"pointColor\": \"rgba(250,110,0,1)\",\"pointStrokeColor\": \"#fff\",\"pointHighlightFill\": \"#fff\",\"pointHighlightStroke\": \"rgba(220,220,220,1)\",\"data\": [65,59,90,81,56,55,40]}]}'
 	print json.dumps(js)
-	print jsonMenciones
 	return json.dumps(js)
-def fav():
+def seguidores():
 	#cargar aqui datos de menciones.
 	""" Formato
 	{
