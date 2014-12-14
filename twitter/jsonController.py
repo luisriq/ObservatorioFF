@@ -36,7 +36,7 @@ def menciones():
 		try:
 			datos[cad.nombre] = 0
 			for user in Usuario.objects.filter(id_cadena = cad):
-				datos[cad.nombre] = datos[cad.nombre]+1
+				datos[cad.nombre] = datos[cad.nombre] + len(Menciona.objects.filter(id_usuario=user))
 				print datos
 		except:
 			print "no"
