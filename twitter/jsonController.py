@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
+from random import shuffle
 
 from .models import Tweet
 ckey = 'wcBPjzyOQhZm7RhTcOqrChbWI'
@@ -85,8 +86,17 @@ def home(request, otro):
 	#twitterStream.filter(track=["pizza"])
 	return HttpResponse(respuesta)#aca yo deberia estar recibiendo un json con la wea y la wea
 def tweets(request, otro):
-	lista = []
+	listaO = []
 	for t in Tweet.objects.all():
-		lista.append([t.id_usuario.cuenta, t.msg])
+		listaO.append([t.id_usuario.cuenta, t.msg])
+	shuffle(listaO)
+	lista = []
+	i=0
+	for t in listaO:
+		if(i>5):
+			break
+		lista.append(t)
+		i+=1
+
 
 	return render(request, 'template.html', {'tweets':lista})
