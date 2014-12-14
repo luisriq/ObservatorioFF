@@ -105,7 +105,8 @@ listaCadenas = [ {"cadena":"KFC", "cuentas":[
 					"TacoBellGuate",
 					"tacobelluk",
 					"TacoBellPA"]
-			 	},{"cadena":"Domino", "cuentas":["dominomag",
+			 	},{"cadena":"Domino", "cuentas":[
+			 		"dominomag",
 					"dominos",
 					"Dominos_UK",
 					"Dominorecordco",
@@ -141,49 +142,68 @@ def home(request, otro):
 	auth = OAuthHandler(ckey, csecret)
 	auth.set_access_token(atoken, asecret)
 	stream = Stream(auth, l)
-	stream.filter(track=['McDonalds', 'fritz', 'kfc', 'domino', 'JuanMaestro'])
+	listaU = []
+	listaH = []
+	for e in listaCadenas:
+		for us in e["cuentas"]:
+			listaU.append("@"+us)
+			listaH.append("#"+us)
+
+	stream.filter(track=listaU+listaH)
 	lista = l.lista
 	api = tweepy.API(auth)
 	#lista = api.search(q="kfc", count=1)
 	for tweet in lista:	#tweepy.Cursor(api.search, q=('kfc')).items(20
 		print "tweet : ", tweet.text
-		'''listaHashtags = tweet.entities.get('hashtags')
+		listaHashtags = tweet.entities.get('hashtags')
+		print "---------------------------------------------------------"
 		print "hashtagas : ", listaHashtags
+		print "---------------------------------------------------------"
 		for hashtag in listaHashtags:
 			cadena = ''
 			for c in listaCadenas:
 				for h in c["cuentas"]:
-					if h == hashtag:
-						cadena = c
-						user = tweet.name
-						u = api.get_user(user)
+					if h == hashtag[u'text']:
+						cadena = c["cadena"]
+						u = api.get_user(h)
+						name = u.screen_name
 						segui = u.followers_count
 						loc = u.location.split(",")
 						city = loc[0]
 						country = "Chile"
 						re = tweet.retweet_count
 						msg = tweet.text
-						contiene = Contiene.crearContiene(hashtag, cadena, re, msg, user, segui, city, country)'''
+						msg = smart_str(msg)
+						print "Cadena :", cadena
+						print "Name :", name
+						print "Segui :", segui
+						print "msg :", msg
+						contiene = Contiene.crearContiene(hashtag[u'text'], cadena, re, msg, name, segui, city, country)
 
 		listaUsers = tweet.entities.get('user_mentions')
 		for usuario in listaUsers:
-			print "Json a dic :", type(usuario)
-			print "Usuario :", usuario
-			u = api.get_user(usuario["screen_name"])
-			segui = u.followers_count
-			loc = u.location.split(",")
-			city = loc[0]
-			country = "Chile"
-			name = usuario[u'screen_name']
-			print name
-			re = tweet.retweet_count
-			print "Retw :", re
-			favs = u.favourites_count
-			print "Favritos :", favs
-			msg = tweet.text
-			print "Texto :", msg
-			mencion = Menciona.crearMenciona(re, smart_str(msg), name, segui, city, country)
-			#usuario = Usuario.crearUsurio(usuario, segui, city, country)
+			name = ''
+			for c in listaCadenas:
+				for h in c["cuentas"]:
+					if h == usuario[u'screen_name']:	
+						u = api.get_user(usuario["screen_name"])
+						cadena = c["cadena"]
+						segui = u.followers_count
+						loc = u.location.split(",")
+						city = loc[0]
+						country = "Chile"
+						name = usuario[u'screen_name']
+						re = tweet.retweet_count
+						favs = u.favourites_count
+						msg = tweet.text
+						print "Json a dic :", type(usuario)
+						print "Usuario :", usuario
+						print name
+						print "Retw :", re
+						print "Favritos :", favs
+						print "Texto :", msg
+						mencion = Menciona.crearMenciona(re, smart_str(msg), name, segui, city, country, cadena)
+						#usuario = Usuario.crearUsurio(usuario, segui, city, country)
 
 
 		

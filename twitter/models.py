@@ -1,4 +1,5 @@
 from django.db import models
+from random import randint
 
 
 class Pais(models.Model):
@@ -44,9 +45,9 @@ class Cadena(models.Model):
 	def __unicode__(self):
 		return self.nombre
 	@staticmethod
-	def crearCadena(nombre, usuario):
+	def crearCadena(nombre):
 		try:
-			cadena = Cadena.objects.get(nombre=nombre, id_usuario=usuario)
+			cadena = Cadena.objects.get(nombre=nombre)
 		except:
 			cadena = Cadena()
 			cadena.nombre = nombre
@@ -65,7 +66,7 @@ class Usuario(models.Model):
 	def __unicode__(self):
 		return self.cuenta
 	@staticmethod
-	def crearUsuario(nombre, seguidores, ciudad, pais):
+	def crearUsuario(nombre, seguidores, ciudad, pais, cadena):
 		try:
 			usuario = Usuario.objects.get(cuenta=nombre)
 		except:
@@ -73,6 +74,7 @@ class Usuario(models.Model):
 			usuario.cuenta = nombre
 			usuario.seguidores = seguidores
 			usuario.id_ciudad = Ciudad.crearCiudad(ciudad, pais)
+			usuario.id_cadena = Cadena.crearCadena(cadena)
 		print "Creando usuario: ", usuario.cuenta
 		usuario.save()
 		return usuario
@@ -82,19 +84,21 @@ class Tweet(models.Model):
 	retweets = models.PositiveIntegerField()
 	msg = models.CharField(max_length=255, default='')
 	id_usuario = models.ForeignKey(Usuario)
+	favoritos = models.PositiveIntegerField(default = 0)
 	class Meta:
 		verbose_name_plural = "Tweet"
 	def __unicode__(self):
 		return self.msg
 	@staticmethod
-	def crearTweet(retweets, msg, usuario, seguidores, ciudad, pais):
+	def crearTweet(retweets, msg, usuario, seguidores, ciudad, pais, cadena):
 		try:
 			tweet = Tweet.objects.get(msg= msg)
 		except:
 			tweet = Tweet()
 			tweet.msg = msg
 			tweet.retweets = retweets
-			tweet.id_usuario = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
+			tweet.id_usuario = Usuario.crearUsuario(usuario, seguidores, ciudad, pais, cadena)
+			tweet.favoritos = random.randint(0, 1000)
 		tweet.save()
 		return tweet
 
@@ -153,11 +157,11 @@ class Contiene(models.Model):
 	class Meta:
 		verbose_name_plural = "Contiene"
 	def __unicode__(self):
-		return str(self.id_hashtag.nombre) + "," + str(self.id_tweet.msg)
+		return str(self.id_hashtag.nombre)
 	@staticmethod
 	def crearContiene(hashtag, cadena, retweets, msg, usuario, seguidores, ciudad, pais):
-		_hashtag = Hashtag.crearHashtag(hastag, cadena)
-		_tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, ciudad, pais)
+		_hashtag = Hashtag.crearHashtag(hashtag, cadena)
+		_tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, ciudad, pais, cadena)
 		try:
 			contiene = Contiene.objects.get(id_hashtag = _hashtag, id_tweet = _tweet)
 		except:
@@ -175,9 +179,9 @@ class Menciona(models.Model):
 	def __unicode__(self):
 		return str(self.id_usuario.cuenta)
 	@staticmethod
-	def crearMenciona(retweets, msg, usuario, seguidores, ciudad, pais):
-		usua = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
-		tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, pais, ciudad)
+	def crearMenciona(retweets, msg, usuario, seguidores, ciudad, pais, cadena):
+		usua = Usuario.crearUsuario(usuario, seguidores, ciudad, pais, cadena)
+		tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, ciudad, pais, cadena)
 		try:
 			menciona = Menciona.objects.get(usua, tweet)
 		except:
