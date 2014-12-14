@@ -31,4 +31,4 @@ def tweets(request, otro):
 	for t in Tweet.objects.all():
 		lista.append({"cuenta":t.id_usuario.cuenta, "mensaje":t.msg})
 
-	return render(request, 'template.html', {'lista':lista})
+	return render(request, 'template.html', {'tweets':lista})
