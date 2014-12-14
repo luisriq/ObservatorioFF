@@ -56,23 +56,6 @@ def menciones():
 	return json.dumps(js)
 def favoritos():
 	#cargar aqui datos de menciones.
-	""" Formato
-	{
-            \"labels\": [\"Eating\", \"Drinking\", \"Sleeping\", \"Designing\", \"Coding\", \"Cycling\", \"Running\"],
-            \"datasets\": [
-              {
-                \"label\": \"My First dataset\",
-                "fillColor": "rgba(230,165,0,0.5)",
-                "strokeColor": "rgba(230,165,0,.8)",
-                "pointColor": "rgba(250,110,0,1)",
-                "pointStrokeColor": "#fff",
-                "pointHighlightFill": "#fff",
-                "pointHighlightStroke": "rgba(220,220,220,1)",
-                "data": [65,59,90,81,56,55,40]
-              }
-            ]
-          }
-	"""
 	cadenas = []
 	contadores = []
 	for cad in Cadena.objects.all():
@@ -103,31 +86,41 @@ def favoritos():
 	return json.dumps(js)
 def seguidores():
 	#cargar aqui datos de menciones.
-	""" Formato
-	{
-            \"labels\": [\"Eating\", \"Drinking\", \"Sleeping\", \"Designing\", \"Coding\", \"Cycling\", \"Running\"],
-            \"datasets\": [
-              {
-                \"label\": \"My First dataset\",
-                \"fillColor\": \"rgba(230,165,0,0.5)\",
-                \"strokeColor\": \"rgba(230,165,0,.8)\",
-                \"pointColor\": \"rgba(250,110,0,1)\",
-                \"pointStrokeColor\": \"#fff\",
-                \"pointHighlightFill\": \"#fff\",
-                \"pointHighlightStroke\": \"rgba(220,220,220,1)\",
-                \"data\": [65,59,90,81,56,55,40]
-              }
-            ]
-          }
-	"""
+	cadenas = []
+	contadores = []
+	for cad in Cadena.objects.all():
+		cadenas.append(cad.nombre)
+		cont = 0
+		for user in Usuario.objects.filter(id_cadena=cad):
+			cont += user.seguidores
+		contadores.append(cont)
+	print cadenas,"|",contadores
+
+	js = {
+		"labels": cadenas,
+		"datasets": [
+		{"label": "Favoritos",
+			"fillColor": "rgba(230,165,0,0.5)",
+    	    "strokeColor": "rgba(230,165,0,.8)",
+        	"pointColor": "rgba(250,110,0,1)",
+	        "pointStrokeColor": "#fff",
+	        "pointHighlightFill": "#fff",
+	        "pointHighlightStroke": "rgba(220,220,220,1)",
+	        "data": contadores
+            }
+		]
+	}
+
 	jsonMenciones='{ \"labels\": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"], \"datasets\": [{ \"label\": \"My First dataset\",\"fillColor\": \"rgba(230,165,0,0.5)\",\"strokeColor\": \"rgba(230,165,0,.8)\",\"pointColor\": \"rgba(250,110,0,1)\",\"pointStrokeColor\": \"#fff\",\"pointHighlightFill\": \"#fff\",\"pointHighlightStroke\": \"rgba(220,220,220,1)\",\"data\": [65,59,90,81,56,55,40]}]}'
-	return jsonMenciones
+	return json.dumps(js)
 def home(request, otro):
 	respuesta = "Error de Soicitud"
 	if(otro=="menciones"):
 		respuesta=menciones()
 	if(otro=="favoritos"):
 		respuesta=favoritos()
+	if(otro=="seguidores"):
+		respuesta=seguidores()
 	#auth = OAuthHandler(ckey, csecret)
 	#auth.set_access_token(atoken, asecret)
 	#twitterStream = Stream(auth, listener())
