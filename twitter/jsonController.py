@@ -6,8 +6,8 @@ from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 from random import shuffle
-
-from .models import Tweet
+import json
+from .models import *
 ckey = 'wcBPjzyOQhZm7RhTcOqrChbWI'
 csecret = 'zGTsXDVEED59MB0wpvGMD6spGYr1HYrKRG9c4CVYy9G9N3Djbl'
 atoken = '228562756-PW0YtSmyS32fEwPFucXaGlkdPRP53hisP1NYoCr4'
@@ -30,8 +30,25 @@ def menciones():
         \"label\": \"Nombre de la cadena\"
     },...]
 	"""
-	jsonMenciones='[{\"value\": 300,\"color\":\"#F7464A\",\"highlight\": \"#FF5A5E\",\"label\": \"McDonals\"},{\"value\": 150,\"color\": \"#46BFBD\",\"highlight\": \"#5AD3D1\",\"label\": \"Burger King\"},{\"value\": 100,\"color\": \"#FDB45C\",\"highlight\": \"#FFC870\",\"label\": \"KFC\"}]'
-	return jsonMenciones
+	
+	datos = {}
+	for cad in Cadena.objects.all():
+		try:
+			datos[cad.nombre] = 0
+			for user in Usuario.objects.filter(id_cadena = cad):
+				datos[cad.nombre] = datos[cad.nombre]+1
+				print datos
+		except:
+			print "no"
+	print "datosadsd",datos
+	jsonMenciones=" ["
+	print type(jsonMenciones)
+	js = []
+	for k in datos.keys():
+		print k, datos[k]
+		print type(jsonMenciones)
+		js.append({"value":datos[k],"color": "#F7464A", "highlight": "#FF5A5E","label": k})
+	return json.dumps(js)
 def favoritos():
 	#cargar aqui datos de menciones.
 	""" Formato
@@ -40,20 +57,47 @@ def favoritos():
             \"datasets\": [
               {
                 \"label\": \"My First dataset\",
-                \"fillColor\": \"rgba(230,165,0,0.5)\",
-                \"strokeColor\": \"rgba(230,165,0,.8)\",
-                \"pointColor\": \"rgba(250,110,0,1)\",
-                \"pointStrokeColor\": \"#fff\",
-                \"pointHighlightFill\": \"#fff\",
-                \"pointHighlightStroke\": \"rgba(220,220,220,1)\",
-                \"data\": [65,59,90,81,56,55,40]
+                "fillColor": "rgba(230,165,0,0.5)",
+                "strokeColor": "rgba(230,165,0,.8)",
+                "pointColor": "rgba(250,110,0,1)",
+                "pointStrokeColor": "#fff",
+                "pointHighlightFill": "#fff",
+                "pointHighlightStroke": "rgba(220,220,220,1)",
+                "data": [65,59,90,81,56,55,40]
               }
             ]
           }
 	"""
+	cadenas = []
+	contadores = []
+	for cad in Cadena.objects.all():
+		cadenas.append(cad.nombre)
+		cont = 0
+		for user in Usuario.objects.filter(id_cadena=cad):
+			for men in Menciona.objects.filter(id_usuario=user):
+				cont += men.id_tweet.favoritos
+		contadores.append(cont)
+	print cadenas,"|",contadores
+
+	js = {
+		"labels": cadenas,
+		"datasets": [
+		{"label": "Favoritos",
+			"fillColor": "rgba(230,165,0,0.5)",
+    	    "strokeColor": "rgba(230,165,0,.8)",
+        	"pointColor": "rgba(250,110,0,1)",
+	        "pointStrokeColor": "#fff",
+	        "pointHighlightFill": "#fff",
+	        "pointHighlightStroke": "rgba(220,220,220,1)",
+	        "data": contadores
+            }
+		]
+	}
 	jsonMenciones='{ \"labels\": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"], \"datasets\": [{ \"label\": \"My First dataset\",\"fillColor\": \"rgba(230,165,0,0.5)\",\"strokeColor\": \"rgba(230,165,0,.8)\",\"pointColor\": \"rgba(250,110,0,1)\",\"pointStrokeColor\": \"#fff\",\"pointHighlightFill\": \"#fff\",\"pointHighlightStroke\": \"rgba(220,220,220,1)\",\"data\": [65,59,90,81,56,55,40]}]}'
-	return jsonMenciones
-def favoritos():
+	print json.dumps(js)
+	print jsonMenciones
+	return json.dumps(js)
+def fav():
 	#cargar aqui datos de menciones.
 	""" Formato
 	{
