@@ -1,17 +1,4 @@
-xmlhttp=new XMLHttpRequest();
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      var jsonRespuesta = JSON.parse(responseText);
-    //document.getElementById("json").innerHTML=xmlhttp.responseText;
-    console.log(jsonRespuesta);
-    /*window.myRadar = new Chart(document.getElementById("menciones").getContext("2d")).Doughnut(
-              jsonRespuesta, {
-              responsive: true
-            });
-    }*/
-  }
+
 
 
 var radarChartData = {
@@ -31,11 +18,35 @@ var radarChartData = {
           };
 
           window.onload = function(){
-            //xmlhttp.open("GET","/json/menciones",true);
-            //xmlhttp.send();
-            window.myRadar = new Chart(document.getElementById("favoritos").getContext("2d")).Bar(radarChartData, {
-              responsive: true 
+            //
+            $.ajax({
+              url: '/json/menciones', //url de la acción symfony
+              dataType: 'text', 
+              success: function(data) //Si se ejecuta correctamente
+              {
+                var datos = $.parseJSON(data);
+                window.myRadar = new Chart(document.getElementById("menciones").getContext("2d")).Doughnut(datos,{responsive: true});
+              },
+              error: function(data)
+              {
+                console.log("error");
+              }
             });
+            $.ajax({
+              url: '/json/favoritos', //url de la acción symfony
+              dataType: 'text', 
+              success: function(data) //Si se ejecuta correctamente
+              {
+                var datos = $.parseJSON(data);
+                
+                window.myRadar = new Chart(document.getElementById("favoritos").getContext("2d")).Bar(datos, {responsive: true});
+              },
+              error: function(data)
+              {
+                console.log("error");
+              }
+            });
+            
             window.myRadar = new Chart(document.getElementById("otros").getContext("2d")).Radar(radarChartData, {
               responsive: true
             });

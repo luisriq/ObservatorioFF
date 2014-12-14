@@ -23,18 +23,62 @@ def menciones():
 	#cargar aqui datos de menciones.
 	""" Formato
 	[{
-        value: <cantidad:int>,
-        color:"#F7464A",#color representativo
-        highlight: "#FF5A5E",#deberia ser el mismo mas clarito
-        label: "Nombre de la cadena"
+        \"value\": <cantidad:int>,
+        \"color\":\"#F7464A\",#color representativo
+        \"highlight\": \"#FF5A5E\",#deberia ser el mismo mas clarito
+        \"label\": \"Nombre de la cadena\"
     },...]
 	"""
-	jsonMenciones='[{value: 300,color:"#F7464A",highlight: "#FF5A5E",label: "McDonals"},{value: 150,color: "#46BFBD",highlight: "#5AD3D1",label: "Burger King"},{value: 100,color: "#FDB45C",highlight: "#FFC870",label: "KFC"}]'
+	jsonMenciones='[{\"value\": 300,\"color\":\"#F7464A\",\"highlight\": \"#FF5A5E\",\"label\": \"McDonals\"},{\"value\": 150,\"color\": \"#46BFBD\",\"highlight\": \"#5AD3D1\",\"label\": \"Burger King\"},{\"value\": 100,\"color\": \"#FDB45C\",\"highlight\": \"#FFC870\",\"label\": \"KFC\"}]'
+	return jsonMenciones
+def favoritos():
+	#cargar aqui datos de menciones.
+	""" Formato
+	{
+            \"labels\": [\"Eating\", \"Drinking\", \"Sleeping\", \"Designing\", \"Coding\", \"Cycling\", \"Running\"],
+            \"datasets\": [
+              {
+                \"label\": \"My First dataset\",
+                \"fillColor\": \"rgba(230,165,0,0.5)\",
+                \"strokeColor\": \"rgba(230,165,0,.8)\",
+                \"pointColor\": \"rgba(250,110,0,1)\",
+                \"pointStrokeColor\": \"#fff\",
+                \"pointHighlightFill\": \"#fff\",
+                \"pointHighlightStroke\": \"rgba(220,220,220,1)\",
+                \"data\": [65,59,90,81,56,55,40]
+              }
+            ]
+          }
+	"""
+	jsonMenciones='{ \"labels\": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"], \"datasets\": [{ \"label\": \"My First dataset\",\"fillColor\": \"rgba(230,165,0,0.5)\",\"strokeColor\": \"rgba(230,165,0,.8)\",\"pointColor\": \"rgba(250,110,0,1)\",\"pointStrokeColor\": \"#fff\",\"pointHighlightFill\": \"#fff\",\"pointHighlightStroke\": \"rgba(220,220,220,1)\",\"data\": [65,59,90,81,56,55,40]}]}'
+	return jsonMenciones
+def favoritos():
+	#cargar aqui datos de menciones.
+	""" Formato
+	{
+            \"labels\": [\"Eating\", \"Drinking\", \"Sleeping\", \"Designing\", \"Coding\", \"Cycling\", \"Running\"],
+            \"datasets\": [
+              {
+                \"label\": \"My First dataset\",
+                \"fillColor\": \"rgba(230,165,0,0.5)\",
+                \"strokeColor\": \"rgba(230,165,0,.8)\",
+                \"pointColor\": \"rgba(250,110,0,1)\",
+                \"pointStrokeColor\": \"#fff\",
+                \"pointHighlightFill\": \"#fff\",
+                \"pointHighlightStroke\": \"rgba(220,220,220,1)\",
+                \"data\": [65,59,90,81,56,55,40]
+              }
+            ]
+          }
+	"""
+	jsonMenciones='{ \"labels\": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"], \"datasets\": [{ \"label\": \"My First dataset\",\"fillColor\": \"rgba(230,165,0,0.5)\",\"strokeColor\": \"rgba(230,165,0,.8)\",\"pointColor\": \"rgba(250,110,0,1)\",\"pointStrokeColor\": \"#fff\",\"pointHighlightFill\": \"#fff\",\"pointHighlightStroke\": \"rgba(220,220,220,1)\",\"data\": [65,59,90,81,56,55,40]}]}'
 	return jsonMenciones
 def home(request, otro):
 	respuesta = "Error de Soicitud"
 	if(otro=="menciones"):
 		respuesta=menciones()
+	if(otro=="favoritos"):
+		respuesta=favoritos()
 	#auth = OAuthHandler(ckey, csecret)
 	#auth.set_access_token(atoken, asecret)
 	#twitterStream = Stream(auth, listener())
