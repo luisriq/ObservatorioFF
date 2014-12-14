@@ -11,7 +11,7 @@ class Pais(models.Model):
 	@staticmethod
 	def crearPais(nombre):
 		try:
-			pais = Pais.objects.get(nombre)
+			pais = Pais.objects.get(nombre=nombre)
 		except:
 			pais = Pais()
 			pais.nombre = nombre
@@ -28,7 +28,7 @@ class Ciudad(models.Model):
 	@staticmethod
 	def crearCiudad(nombre, pais):
 		try:
-			ciudad = Ciudad.objects.get(nombre)
+			ciudad = Ciudad.objects.get(nombre=nombre)
 		except:
 			ciudad = Ciudad()
 			ciudad.nombre = nombre
@@ -59,7 +59,7 @@ class Usuario(models.Model):
 	seguidores = models.PositiveIntegerField()
 	cuenta = models.CharField(max_length = 255, default = '')
 	id_ciudad = models.ForeignKey(Ciudad)
-	id_cadena = models.ForeignKey(Cadena, null=True)
+	id_cadena = models.ForeignKey(Cadena, blank=True, null = True)
 	class Meta:
 		verbose_name_plural = "Usuario"
 	def __unicode__(self):
@@ -67,12 +67,13 @@ class Usuario(models.Model):
 	@staticmethod
 	def crearUsuario(nombre, seguidores, ciudad, pais):
 		try:
-			usuario = Usuario.objects.get(nombre)
+			usuario = Usuario.objects.get(cuenta=nombre)
 		except:
 			usuario = Usuario()
-			usuario.nombre = nombre
+			usuario.cuenta = nombre
 			usuario.seguidores = seguidores
 			usuario.id_ciudad = Ciudad.crearCiudad(ciudad, pais)
+		print "Creando usuario: ", usuario.cuenta
 		usuario.save()
 		return usuario
 
@@ -88,7 +89,7 @@ class Tweet(models.Model):
 	@staticmethod
 	def crearTweet(retweets, msg, usuario, seguidores, ciudad, pais):
 		try:
-			tweet = Tweet.objects.get(msg)
+			tweet = Tweet.objects.get(msg= msg)
 		except:
 			tweet = Tweet()
 			tweet.msg = msg
@@ -108,7 +109,7 @@ class Hashtag(models.Model):
 	@staticmethod
 	def crearHashtag(nombre, cadena):
 		try:
-			hastag = Hashtag.objects.get(nombre)
+			hastag = Hashtag.objects.get(nombre = nombre)
 		except:
 			hastag = Hashtag()
 			hastag.nombre = nombre
@@ -127,7 +128,7 @@ class Comida(models.Model):
 	@staticmethod
 	def crearComida(nombre):
 		try:
-			comida = Comida.objects.get(nombre)
+			comida = Comida.objects.get(nombre = nombre)
 		except:
 			comida = Comida()
 			comida.nombre = nombre
@@ -155,12 +156,14 @@ class Contiene(models.Model):
 		return str(self.id_hashtag.nombre) + "," + str(self.id_tweet.msg)
 	@staticmethod
 	def crearContiene(hashtag, cadena, retweets, msg, usuario, seguidores, ciudad, pais):
+		_hashtag = Hashtag.crearHashtag(hastag, cadena)
+		_tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, ciudad, pais)
 		try:
-			contiene = Contiene.objects.get(str(hashtag)+","+str(msg))
+			contiene = Contiene.objects.get(id_hashtag = _hashtag, id_tweet = _tweet)
 		except:
 			contiene = Contiene()
-			contiene.id_hashtag = Hashtag.crearHashtag(hastag, cadena)
-			contiene.id_tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, ciudad, pais)
+			contiene.id_tweet = _tweet
+			contiene.id_hashtag = _hashtag
 		contiene.save()
 		return contiene
 
@@ -170,15 +173,17 @@ class Menciona(models.Model):
 	class Meta:
 		verbose_name_plural = "Menciona"
 	def __unicode__(self):
-		return str(self.id_usuario.cuenta)+","+str(self.id_tweet.msg)
+		return str(self.id_usuario.cuenta)
 	@staticmethod
 	def crearMenciona(retweets, msg, usuario, seguidores, ciudad, pais):
+		usua = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
+		tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, pais, ciudad)
 		try:
-			menciona = Menciona.objects.get(usuario+","+msg)
+			menciona = Menciona.objects.get(usua, tweet)
 		except:
 			menciona = Menciona()
-			menciona.id_usuario = Usuario.crearUsuario(usuario, seguidores, ciudad, pais)
-			menciona.id_tweet = Tweet.crearTweet(retweets, msg, usuario, seguidores, pais, ciudad)
+			menciona.id_usuario=usua
+			menciona.id_tweet = tweet
 		menciona.save()
 		return menciona
 
@@ -198,15 +203,17 @@ class Sigue(models.Model):
 	class Meta:
 		verbose_name_plural = "Sigue"
 	def __unicode__(self):
-		return str(self.id_cadena.nombre)+","+str(self.id_usuario.nombre)
+		return str(self.id_cadena.nombre)
 	@staticmethod
 	def crearSigue(usuario, seguidores, ciudad, pais, cadena):
+		_cadena = Cadena.crearCadena(cadena)
+		_usuario = Usuario.crearUsuario(usuario, seguidres, ciudad, pais)
 		try:
-			sigue = Sigue.objects.get(cadena+","+usuario)
+			sigue = Sigue.objects.get(id_cadena = _cadena, id_usuario=_usuario)
 		except:
 			sigue = Sigue()
-			sigue.id_cadena = Cadena.crearCadena(cadena)
-			sigue.id_usuario = Usuario.crearUsuario(usuario, seguidres, ciudad, pais)
+			sigue.id_cadena = _cadena
+			sigue.id_usuario = _usuario
 		sigue.save()
 		return sigue
 

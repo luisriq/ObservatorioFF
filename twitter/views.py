@@ -5,6 +5,8 @@ import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
+from django.utils.encoding import smart_str, smart_unicode
+import json
 
 from .models import *
 ckey = 'wcBPjzyOQhZm7RhTcOqrChbWI'
@@ -122,7 +124,7 @@ class listener(StreamListener):
 		self.lista = []
 
 	def on_status(self, status):
-		if self.count < 10:
+		if self.count < 5:
 			print status
 			self.count += 1
 			self.lista.append(status)
@@ -139,12 +141,13 @@ def home(request, otro):
 	auth = OAuthHandler(ckey, csecret)
 	auth.set_access_token(atoken, asecret)
 	stream = Stream(auth, l)
-	stream.filter(track=['#McDonalds', '#fritz', '#kfc'])
+	stream.filter(track=['McDonalds', 'fritz', 'kfc', 'domino', 'JuanMaestro'])
 	lista = l.lista
 	api = tweepy.API(auth)
 	#lista = api.search(q="kfc", count=1)
-	for tweet in lista:	#tweepy.Cursor(api.search, q=('kfc')).items(20):
-		listaHashtags = tweet.entities.get('hashtags')
+	for tweet in lista:	#tweepy.Cursor(api.search, q=('kfc')).items(20
+		print "tweet : ", tweet.text
+		'''listaHashtags = tweet.entities.get('hashtags')
 		print "hashtagas : ", listaHashtags
 		for hashtag in listaHashtags:
 			cadena = ''
@@ -152,31 +155,35 @@ def home(request, otro):
 				for h in c["cuentas"]:
 					if h == hashtag:
 						cadena = c
-						print cadena, " ==?? ", c
-			if cadena != '':
-				user = tweet.name
-				u = api.get_user(user)
-				segui = u.followers_count
-				loc = u.location.split(",")
-				city = loc[0]
-				country = "Chile"
-				re = tweet.retweet_count
-				msg = tweet.text
-				print "usuarios de cadena :", user
-				contiene = Contiene.crearContiene(hashtag, cadena, re, msg, user, segui, city, country)
+						user = tweet.name
+						u = api.get_user(user)
+						segui = u.followers_count
+						loc = u.location.split(",")
+						city = loc[0]
+						country = "Chile"
+						re = tweet.retweet_count
+						msg = tweet.text
+						contiene = Contiene.crearContiene(hashtag, cadena, re, msg, user, segui, city, country)'''
 
 		listaUsers = tweet.entities.get('user_mentions')
 		for usuario in listaUsers:
+			print "Json a dic :", type(usuario)
+			print "Usuario :", usuario
 			u = api.get_user(usuario["screen_name"])
 			segui = u.followers_count
 			loc = u.location.split(",")
 			city = loc[0]
 			country = "Chile"
+			name = usuario[u'screen_name']
+			print name
 			re = tweet.retweet_count
+			print "Retw :", re
 			favs = u.favourites_count
+			print "Favritos :", favs
 			msg = tweet.text
-			print "tweet : ", msg
-			mencion = Menciona.crearMenciona(re, msg, usuario, segui, city, country)
+			print "Texto :", msg
+			mencion = Menciona.crearMenciona(re, smart_str(msg), name, segui, city, country)
+			#usuario = Usuario.crearUsurio(usuario, segui, city, country)
 
 
 		
