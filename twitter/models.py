@@ -1,5 +1,5 @@
 from django.db import models
-from random import randint
+import random
 
 
 class Pais(models.Model):
