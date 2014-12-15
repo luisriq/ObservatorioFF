@@ -12,6 +12,7 @@ Pasos:
 * git clone https://github.com/luisriq/ObservatorioFF.git
 * ./manage.py runserver
 * Acceder a localhost:8000/index/
+
 Requerimientos: 
 
 * Django 1.7
