@@ -1,4 +1,4 @@
-ObservatorioFF
+Observatorio Comida Rapida
 ==============
 
 Projecto Django
