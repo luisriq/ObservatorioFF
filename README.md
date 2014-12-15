@@ -1,7 +1,8 @@
 ObservatorioFF
 ==============
 
-Projecto Django, observatorio Comida Rapida usando la api de twitter
+Projecto Django
+Observatorio Comida Rapida usando la api de twitter
 
 Pasos:
 * Crear directorio: mkdir bd
